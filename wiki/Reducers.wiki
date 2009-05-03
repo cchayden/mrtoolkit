@@ -9,10 +9,15 @@ Declarations, both field, emit, and separator declarations are the same as for m
 
 Reducer input fie names are ordinarily the same as mapper output field names, but they don't have to be: you can name them anything.
 
+== Processing ==
+=== Begin and End ===
+{{{
+process_begin(dummy, output)
+process_end(dummy, output)
+}}}
+As with mappers, {{{process_begin}}} is called before any input records are processed.  {{{Process_end}}} is called after all input records have been processed.  
 
-process_begin
-process_end
-
+=== Groups ===
 process_init
 process_each
 process_term
@@ -21,5 +26,3 @@ process_term
 {{{new_output}}}
 
 As with mappers, you can get instance of output records by calling {{{new_output}}}.
-
-
