@@ -12,11 +12,11 @@ If you have downloaded the tar file, unpack by:
 }}}
 
 == Configuring MRToolkit ==
-Life will be simpler if you specify where to find mrtoolkit.  For example, you would include the following in .bash_profile:
+Life will be simpler if you specify where to find mrtoolkit.  For example, you would include the following in {{{.bash_profile}}}:
 {{{
 export RUBYLIB=$HOME/mrtoolkit/lib
 }}}
-If you don't want to do this, you can accomplish the same thing in a Rakefile.  For example, see examples/Rakefile.
+If you don't want to do this, you can accomplish the same thing in a Rakefile.  For example, see {{{examples/Rakefile}}}.
 
 == Installing Hadoop ==
 
