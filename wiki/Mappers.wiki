@@ -48,7 +48,7 @@ You can define field separators with {{{field_separator}}} and {{{emit_separator
 If possible, it is easiest to convert to the standard (TAB) field separators in the import step.
 
 === Executable field and emit ===
-Field and emit are designed to look like declarations, but in reality they are executable statements.  They are class methods of MapBase.  It is a standard feature of ruby that they can be "called" without using parentheses.  
+Field and emit are designed to look like declarations, but in reality they are executable statements.  They are class methods of !MapBase.  It is a standard feature of ruby that they can be "called" without using parentheses.  
 
 Normally you do not need to think about this.  But it does allow you to make these "declarations" dynamic.  For instance, you can define three fields this way:
 {{{
