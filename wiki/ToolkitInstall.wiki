@@ -2,12 +2,61 @@
 
 = Installation =
 
-Add your content here.
+== Installing MRToolkit ==
 
+MRToolkit requires no installation other than downloading and unpacking.  
 
-= Details =
+If you have downloaded the tar file, unpack by:
+{{{
+  tar xfz mrtoolkit.tar.gz
+}}}
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+== Configuring MRToolkit ==
+Life will be simpler if you specify where to find mrtoolkit.  For example, you would include the following in .bash_profile:
+{{{
+export RUBYLIB=$HOME/mrtoolkit/lib
+}}}
+If you don't want to do this, you can accomplish the same thing in a Rakefile.  For example, see examples/Rakefile.
+
+== Installing Hadoop ==
+
+Normally, you install and run MRToolkit on a system that already has Hadoop.  So that will not be described in detail here.  For complete instructions, see [http://hadoop.apache.org/core/docs/current/cluster_setup.html Cluster Setup].
+
+But you might want to install a simple non-cluster version of Hadoop to test out your scripts on a data subset, to get them working.  See the Hadoop [http://hadoop.apache.org/core/docs/current/quickstart.html Quick Start] for instructions.  
+
+If you follow the Quick Start instructions carefully, you will get a working version of Hadoop.  One more thing you must do is to set and export HADOOP_HOME and put this in your path.  You should also define HADOOP_STREAMING_VERSION, particularly if it is different from what appears below.  You can determine the proper version by looking at 
+$HADOOP_HOME/contrib/streaming/hadoop-<version>-streaming.jar.
+{{{
+export HADOOP_HOME=$HOME/hadoop-0.20.0
+export HADOOP_STREAMING_VERSION=0.20.0
+PATH=$PATH:$HADOOP_HOME/bin
+}}}
+
+== Using the Simulated Environment ==
+
+In Hadoop, your job runs on computers in the cluster, ordinarily not the one you are running your program on.  This presents obstacles to debugging, if something goes wrong.  Even if you run in the Quick Start environment locally, the jobs execute as part of Hadoop, and it can be hard to see what they are doing.  
+
+To make it simpler to debug, a *simulated* environment is provided.  It simply concatenates all input files, pipes them to the mapper, sorts the output, pipes the result to the reducer, and stores the output.  It also simulates the Hadoop File System.
+
+To use this simulated environment, just include mrtoolkit/sim in the path before $HADOOP_HOME:
+{{{
+PATH=$HOME/mrtoolkit/sim:$PATH
+}}}
+
+Now you can write output such as
+{{{
+STDERR.puts "trace message"
+}}}
+in the mapper or reducer, and see the result on the console.  Remember, whether it is the simulaed environment or actual Hadoop, STDOUT is reserved for the data stream, so you cannot use it for trace output.
+
+The simulated environment redefines the {{{hadoop}}} command, but only a small subset of its capabilities.  It will do:
+  * hadoop fs -rmr
+  * hadoop fs -rm
+  * hadoop fs -mkdir
+  * hadoop fs -put
+  * hadoop fs -cat
+  * hadoop fs -ls
+  * hadoop fs -lsr
+  * hadoop jar
+
+The Hadoop File System is simulated in the current directory.  So if you have an import step, be sure to run it in the simulated environment, and make sure that you put the imported files somewhere different from their original place.
