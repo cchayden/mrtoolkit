@@ -1,4 +1,4 @@
-#summary How to install MRToolkit and Hadoop
+#summary Describes how to install MRToolkit and Hadoop
 
 = Installation =
 
