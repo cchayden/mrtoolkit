@@ -73,10 +73,10 @@ The return value of each of these functions is either:
   * Array of output - Each of the output records is passed to the reducer
 If the function returns an output record, but it is the empty record passed to it, no output record is generated.
 
-{{{process_begin(dummy, output)}}}
+==== process_begin(dummy, output) ====
 {{{Process_begin}}} is called before any input records.  It is normally used to initialize member variables, so it ignores its arguments and returns nil.
 
-{{{process(input, output)}}}
+==== process(input, output) ====
 {{{Process}}} is called on each input record.  {{{Input}}} is a {{{Struct}}} with input fields as described above.  The mapper generally produces a single output record by filling in {{{output}}}, or else produces no output by returning nil.
 
 {{{Process}}} can filter its input, reorder the fields, clean up and reformat the field values, and generally prepare for the next steps.  Less often, {{{process}}} produces new fields that are built from values in the input.  This is done, for instance, to prepare for joint uniqueness [Predefined See predefined reducers].
