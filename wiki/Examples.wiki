@@ -54,8 +54,8 @@ The reducer, !MaxUniqueSumReduce, is a version of !UniqueSumReduce which only re
 Because Hadoop may use many reducers, and each operates independently, each will output a different 10 highest file-count pairs.  These are not guaranteed to be the highest overall, since each reducer sees different pairs.  But the output _is_ guaranteed to have to 10 highest counts overall.
 
 == import.rb ==
-See [http://code.google.com/p/mrtoolkit/source/browse/trunk/examples/import.rb import.rb].
-See [http://code.google.com/p/mrtoolkit/source/browse/trunk/examples/import-logs import-logs].
+See [http://code.google.com/p/mrtoolkit/source/browse/trunk/examples/import.rb import.rb]
+and [http://code.google.com/p/mrtoolkit/source/browse/trunk/examples/import-logs import-logs].
 
 This is not a Hadoop job, but an import program for Apache log files.
 It takes a raw file on standard input and produces a clean up and delimited one on standard output.  The shell program {{{import-logs}}} creates a directory in HDFS, feeds each of the raw log files into import.rb, and stores the result in HDFS.
