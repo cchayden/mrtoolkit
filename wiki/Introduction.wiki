@@ -1,0 +1,38 @@
+#MRTools Overview
+
+= Introduction =
+
+== Overview of MRToolkit ==
+
+
+*MRToolkit* is a framework for simplifying building jobs to run on the [http://hadoop.apache.org/ Hadoop] Map/Reduce system.  MRToolkit builds on Hadoop [http://hadoop.apache.org/core/docs/current/streaming.html Streaming], which allows you to write separate map and reduce jobs that operate through standard input and output.
+
+MRToolkit is built with [http://www.ruby-lang.org ruby]: you use ruby to write the map and reduce steps, and MRToolkit, streaming, and Hadoop do the rest.
+
+Just to give a taste of how simple it can be, here is a complete map/reduce program:
+{{{
+require 'mrtoolkit'
+
+class MainJob < JobBase
+  def job
+    mapper CopyMap
+    reducer UniqueCountReduce
+    indir "logs"
+    outdir "ip"
+  end
+end
+
+
+MainJob.run_command(__FILE__)
+}}}
+
+This program goes through a set of (slightly modified) Apache log files, and produces a list of all the unique IP addresses, along with a count of how many times each one was used.
+
+== More Information ==
+  * Installation
+  * Examples
+  * Jobs
+  * Mappers
+  * Reducers
+  * Predefined mappers and reducers
+  * Multi-step jobs
