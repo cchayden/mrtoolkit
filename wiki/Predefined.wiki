@@ -5,14 +5,14 @@
 As a convenience, MRToolkit comes with a set of predefined mappers and reducers.  This collection will be expanded over time as we discover more commonly-used map and reduce operations.
 
 == Mappers ==
-=== !CopyMap ==
+=== !CopyMap ===
 {{{CopyMap, copy}}}
 
 !CopyMap copies its input to its output.  The optional {{{copy}}} argument specifies how many fields to copy (defaults to 1).  
 
 This is useful where the purpose of the job is performed by the reduce stage, or where you want to eliminate some of the fields.
 
-=== !SelectMap ==
+=== !SelectMap ===
 {{{SelectMap, re, field, copy}}}
 
 !SelectMap selects records from its input based on a given regular expression.  The expression is matched against field {{{field}}}.  Field numbers are zero based. The optional {{{copy}}} argument specifies how many fields to copy (defaults to 1).  
@@ -32,14 +32,14 @@ This reducer is often useful if you want to generate a field during the map phas
 
 !CopyMap and !CopyReduce can be used together where the purpose of the job is primarily the sorting stage that is performed as part of the shuffle.
 
-=== !UniqueReduce ==
+=== !UniqueReduce ===
 {{{UniqueReduce}}}
 
 !UniqueReduce examines the first field of every record, and outputs only the last record of each series with the same first field.  Because the shuffle operation brings together all records with the same first field, this effectively picks one of them for output.
 
 This reducer is useful for creating samples of the data, for each unique value of the first field.
 
-=== !SumReduce ==
+=== !SumReduce ===
 {{{SumReduce, count, skip}}}
 
 !SumReduce sums the values in the given fields.  The optional argument {{{count}}} gives the number of fields to sum (defaults to 1).  The optional argument {{{skip}}} gives the number of initial fields to skip.  
@@ -50,7 +50,7 @@ This is useful for adding up totals across the entire input set.  In this instan
 
 Remember that each reducer produces its own output, so if you want a sum across all records, you will need to sum up the final result of each reducer separately.
  
-=== !UniqueSumReduce ==
+=== !UniqueSumReduce ===
 {{{UniqueSumReduce, count, extra}}}
 
 !UniqueSumReduce sums up fields within each group of records that have the same first field.  The optional argument {{{count}}} gives the number of fields to sum.  
@@ -82,7 +82,7 @@ Then use {{{UniqueSumReduce 1, 2}}}.  This will sum up the byte counts for each 
 
 If you simply need to identify the unique values in a field and count up the number of their occurences, use this reducer.  It is used in the examples to count the number of requests from each IP address.
 
-=== !UniqueIndexedSumReduce ==
+=== !UniqueIndexedSumReduce ===
 {{{UniqueIndexedSumReduce}}}
 
 !UniqueIndexedSumReduce operates on groups of records with the same first field.  It outputs one output record for each unique value of the second field.  The output record consists of the first (grouping) field, the second field, and a sum of the values of the third field (for each value of the first two fields).
@@ -93,14 +93,14 @@ Because the input is not grouped on the second field, the reducer must have memo
 
 This reducer provides another way to do joint uniqueness across two fields, applicable when there is a limited number of values in the second field.  The example above, using the result code for the second field, is appropriate because there are only a few result code values in use.
 
-=== !SampleReduce ==
+=== !SampleReduce ===
 {{{SampleReduce, sample_size}}}
 
 !SampleReduce is used to take a random sample of its input.  The {{{sample_size}} argument is required.  !SampleReduce looks only at the first field of each record, and outputs only this same field.  A total of {{{sample_size}}} output records are generated (unless there are fewer than that in the input data set).  
 
 Each record input to !SampleReduce has an equal chance of being selected.  All computation is done in memory, so the sample size cannot be too large (millions).  The running time of !SampleRecuce is independent of the sample size.
 
-=== !MaxReduce ==
+=== !MaxReduce ===
 {{{MaxReduce, count}}}
 
 !MaxReduce takes groups of records with the same first field, and produces the {{{count}}} members with the highest values of the second field.  
@@ -116,7 +116,7 @@ Values are compared using {{{<=>}}}. If this is not the comparison that you want
   end
 }}}
 
-=== !UniqueFirstReduce ==
+=== !UniqueFirstReduce ===
 {{{UniqueFirstReduce, copy, skip}}}
 
 !UniqueFirstReduce picks the first record in each group with the same first field.  The optional argument {{{copy}}} specifies how many fields to copy (default 1).  The optional {{{skip}}} specifies how many fields (after the first) to skip before copying (default 0).  
