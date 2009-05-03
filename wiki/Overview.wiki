@@ -15,7 +15,7 @@ With MRToolkit, most of this is handled by the framework.  You have to
 To make things even simpler, MRToolkit comes with a set of pre-written mappers and reducers, so you might not have to even write a mapper or reducer class.
 
 == Details ==
-In practice, you usually wind up writing a mapper class, but con often make use of a standard reducer.  Mappers are simpler to write, because they ordinarily process one record at a time and retain no memory from one record to the next.  Mapper state is impractical, because you cannot be sure whether two records will even be processed by the same mapper instance.
+In practice, you usually wind up writing a mapper class, but can often make use of a standard reducer.  Mappers are simpler to write, because they ordinarily process one record at a time and retain no memory from one record to the next.  Mapper state is impractical, because you cannot be sure whether two records will even be processed by the same mapper instance.
 
 Reducers ususally _do_ have state, because the whole point of reducers is to process groups of related records that have been brought together by the shuffle.  This makes them harder to write.  See how the pre-written reducers are implemented for ideas on how best to do this.
 
