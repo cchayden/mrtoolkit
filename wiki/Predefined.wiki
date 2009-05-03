@@ -74,7 +74,7 @@ Sometimes it is desired to group by two fields at the same time.  For instance, 
   * IP address
   * user agent
 Then use {{{UniqueSumReduce 1, 2}}}.  This will sum up the byte counts for each unique combination of IP address and user agent, and also output the IP address and user agent separately.  A post-processing step can eliminate the first field.
-  
+
 === !UniqueCountReduce ===
 {{{UniqueCountReduce extra}}}
 
