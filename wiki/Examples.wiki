@@ -2,12 +2,12 @@
 
 = Examples =
 
-Add your content here.
+The {{{examples}}} directory contains some samples jobs.  These were designed to illustrate various constructs and techniques.
 
+== ip.rb ==
+== ip-size ==
+== hour ==
+== section ==
+== top-files ==
 
-= Details =
-
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+== import ==
