@@ -1,0 +1,50 @@
+#summary Provides a quick overview of MRToolkit.
+
+= Overview =
+
+MRToolkit constructs a *job* and submits it to Hadoop for execution.  The job consists of two parts: a map program and a reduce program.  Each of these may be executed (on different parts of the input data set) on different servers.
+
+In a regular *streaming* job, each of these two program gets input from standard input, parses each line into records, processes these records, constructs an output record, and sends it to standard output.
+
+With MRToolkit, most of this is handled by the framework.  You have to 
+  # Define a (mapper or reducer) class that derives from a framework (mapper or reducer) base class.
+  # Declare the names of the input and output fields.
+  # Define the processing of individual records.
+  # Declare the location of the input files, and where to put the output files.
+
+To make things even simpler, MRToolkit comes with a set of pre-written mappers and reducers, so you might not have to even write a mapper or reducer class.
+
+== Details ==
+In practice, you usually wind up writing a mapper class, but con often make use of a standard reducer.  Mappers are simpler to write, because they ordinarily process one record at a time and retain no memory from one record to the next.  Mapper state is impractical, because you cannot be sure whether two records will even be processed by the same mapper instance.
+
+Reducers ususally _do_ have state, because the whole point of reducers is to process groups of related records that have been brought together by the shuffle.  This makes them harder to write.  See how the pre-written reducers are implemented for ideas on how best to do this.
+
+== Mapper ==
+The mapper usually consists of two parts: input and output field declarations and a processing step.
+
+Input field are declared in a {{{declare}}} function, using the {{{field}}} tag.  
+Output fields are declared using an {{{emit}}} tag.  Here is an example, which describes the Apache Combined Log format, and which outputs two fields "hour" and "count".
+{{{
+  def declare
+    # declare log fields
+    field :ip
+    field :client_id
+    field :user_id
+    field :dt_tm
+    field :request
+    field :status
+    field :result_size
+    field :referer
+    field :ua
+
+    emit :hour
+    emit :count
+  end
+}}}
+
+=== Notes ===
+The Combined Log Format is described [http://httpd.apache.org/docs/1.3/logs.html here].
+
+Streaming, thus MRToolkit, requires field delimiters.  Because the log files as produced by Apache do not provide such delimiters, a log file importer rewrites the files as it copies them to the Hadoop File System, where they must reside to be accessible to Hadoop.
+
+The supplied importer (found in {{{examples/import.rb}}}) splits the log files, removes delimiters such as the brackets around the time and the quotes around several other fields, and inserts TABs as field delimiters.
