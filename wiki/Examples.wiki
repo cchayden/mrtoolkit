@@ -5,6 +5,8 @@
 The {{{examples}}} directory contains some samples jobs.  These were designed to illustrate various constructs and techniques.
 
 == ip.rb ==
+See [http://code.google.com/p/mrtoolkit/source/browse/trunk/examples/ip.rb source].
+
 This is the simplest example, containing only a job class.  It uses the pre-written !CopyMap, which simply copies its input to the output with no processing.  The pre-written reducer !UniqueCountReduce counts the number of each unique instance of the first field, and outputs the field and its count.  
 
 Hadoop, and MRToolkit, leaves the reducer output in HDFS, in as many files as there were reduce jobs.  Because it is not particularly useful in this form, a subsequent processing step ordinarily copies all the reduce output files to the local file system, then concatenates and sorts them.  These steps are done in the included Rakefile tasks.
