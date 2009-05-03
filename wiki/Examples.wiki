@@ -11,19 +11,19 @@ Hadoop, and MRToolkit, leaves the reducer output in HDFS, in as many files as th
 
 In this case we want to sort on the second field (the count) so we see the IP addresses that generated the most hits.
 
-== section ==
+== section.rb ==
 This job extracts the section name (the first directory segment of the requested path) and counts the occurrences of each one.
 
 The mapper process step extracts the section name and adds a count (1).  The pre-written reducer UniqueSumReduce sums these up.  This example could have omitted the count and used UniqueCountReduce, but was done this way to introduce the sum reducer.
 
-== ip-size ==
+== ip-size.rb ==
 This job adds up the size of all the results returned to each distinct IP address.
 
 It illustrates how to define input and output fields.  Its process step picks up selected input fields and places them in the output.  This is pretty typical: the mapper is often used to select and rearrange the input fields.  Remember that the output of the mapper is shuffled, so that all records with the same first field are fed to the (same) reducer together.
 
 Here UniqueSumReduce actually has something to add up (rather than just counting as in the last example).  
 
-== hour ==
+== hour.rb ==
 This job summaries the traffic by hour.  It counts the requests that occur in each hour, across all the days.  
 
 This illustrates an atypical mapper.  A more straightforward implementation would have extracted and output just the hour.  Then UniqueCountReduce could have been used to count up each of the numbers (0-23).
@@ -34,7 +34,7 @@ So each mapper writes only 24 lines of output.  The reducer needs only sum these
 
 The functions process_begin and process_end are used to (1) initialize the counter array, and (2) write the mapper output.  You should only define these functions if you need them.
 
-== top-files ==
+== top-files.rb ==
 This job finds the top 10 most frequently requested files (using the full request path).  
 
 The map stage by this time should be familiar: it simply picks out the path and adds a count of 1.
