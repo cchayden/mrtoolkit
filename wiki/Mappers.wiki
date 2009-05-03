@@ -29,9 +29,9 @@ For example, the following declares the fields of the Apache combined log format
 }}}
 
 Records are delimited by newline characters; fields within a record are delimited by TABs, although this can be changed in the Job declaration.  The framework reads records, parses them into fields, which are essentially ruby {{{Struct}}} objects.  So the fields of the input record can be referred to in the following ways:
-||input.ip || The "ip" (first) field of the input ||
-|| input.dt_tm || The "dt_tm" (fourth) field of the input ||
-|| input[0] || the "ip" (first) field ||
+  * {{{input.ip}}} The "ip" (first) field of the input
+  * {{{input.dt_tm}}} The "dt_tm" (fourth) field of the input
+  * {{{input[0]}}} The "ip" (first) field
 
 
 field name
