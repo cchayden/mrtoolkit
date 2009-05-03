@@ -27,9 +27,9 @@ MainJob.run_command(__FILE__)
 This program goes through a set of (slightly modified) Apache log files, and produces a list of all the unique IP addresses, along with a count of how many times each one was used.
 
 == More Information ==
-  * Installation
-  * Examples
-  * Jobs
+  * [ToolkitInstall Installation]
+  * [ToolkitExamples Examples]
+  * [Jobs Jobs]
   * Mappers
   * Reducers
   * Predefined mappers and reducers
