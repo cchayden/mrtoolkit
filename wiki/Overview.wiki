@@ -23,7 +23,7 @@ Reducers ususally _do_ have state, because the whole point of reducers is to pro
 The mapper usually consists of two parts: input and output field declarations and a processing step.
 
 Input field are declared in a {{{declare}}} function, using the {{{field}}} tag.  
-Output fields are declared using an {{{emit}}} tag.  Here is an example, which describes the Apache Combined Log format, and which outputs two fields "hour" and "count".
+Output fields are declared using an {{{emit}}} tag.  Here is an example, which describes the Apache Combined Log format, and which outputs two fields "path" and "count".
 {{{
   def declare
     # declare log fields
@@ -37,10 +37,24 @@ Output fields are declared using an {{{emit}}} tag.  Here is an example, which d
     field :referer
     field :ua
 
-    emit :hour
+    emit :path
     emit :count
   end
 }}}
+
+In addition to the field declarations, the mapper transforms each input record into an output record.  This is normally done by defining {{{process}}}.
+
+In the following example, the processing function looks at the HTTP request header, and extracts the first segment of the pathname of GET requests.
+{{{
+  def process(input, output)
+    if input.request =~ /GET\s+(\S+)\s/
+      output.path = $1
+      output.count = 1
+    end
+    output
+  end
+}}}
+The function is passed an input record, populated with fields corresponding to the declaration.  It is also passed en empty output record (so that the routine does not have to instantiate one).  We see here that if the request is GET, then it sets the output record.  In any case
 
 === Notes ===
 The Combined Log Format is described [http://httpd.apache.org/docs/1.3/logs.html here].
