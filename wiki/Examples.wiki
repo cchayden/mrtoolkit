@@ -42,8 +42,8 @@ So each mapper writes only 24 lines of output.  The reducer needs only sum these
 
 The functions process_begin and process_end are used to (1) initialize the counter array, and (2) write the mapper output.  You should only define these functions if you need them.
 
-== top-files.rb ==
-See [http://code.google.com/p/mrtoolkit/source/browse/trunk/examples/top-files.rb source].
+== top-file.rb ==
+See [http://code.google.com/p/mrtoolkit/source/browse/trunk/examples/top-file.rb source].
 
 This job finds the top 10 most frequently requested files (using the full request path).  
 
