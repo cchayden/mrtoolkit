@@ -1,4 +1,5 @@
 #summary Provides an overview of MRToolkit.
+#labels Featured
 
 == Overview of MRToolkit ==
 
