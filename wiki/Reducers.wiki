@@ -2,12 +2,16 @@
 
 = Reducers =
 
-Add your content here.
+To define your own reducer, you should write a class derived from !ReduceBase.
 
 
-= Details =
+process_begin
+process_end
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+process_init
+process_each
+process_term
+
+new_output
+
+write_out
