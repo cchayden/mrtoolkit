@@ -38,3 +38,5 @@ This program goes through a set of (slightly modified) Apache log files, and pro
 
 == Acknowledgements ==
 MRToolkit was inspired by Goolge's [http://labs.google.com/papers/sawzall.html Sawzall].  We wanted to make it even easier by making use of an existing language, rather than inventing a new one.  Ruby was a perfect fit.
+
+The initial development of this software was supported by the New York Times, with the support and encouragement of Vadim Jelezniakov and Ranjit Probhu.
