@@ -58,6 +58,25 @@ The function is passed an input record, populated with fields corresponding to t
 
 The function normally returns the output record, which is eventually passed to the reducer.  If the output record is not assigned, or if the function returns {{{nil}}} then this input record does not generate output to the reducer.
 
+== Job ==
+The job class declares how to assemble the Hadoop job.  It defines the mapper and reducer class names, the input directory, and the output directory.
+
+For example, here is an example:
+{{{
+class MainJob < JobBase
+  def job
+    mapper MainMap
+    reducer MaxUniqueSumReduce, 10
+    indir "logs"
+    outdir "top-file"
+  end
+end
+}}}
+All job specifications are in a {{{job}}} function.
+The mapper and reducer declarations speficy the names of the mapper and reducer classes.  In this case, MainMap is a custom mapper, and MaxUniqueSumReduce is a pre-written class that takes one parameter (10).
+The indir declaration specifies the input directory (in HDFS): all the files in this directory will be processed.  
+The outdir declaration specifies the output directory (IN HDFS): it will be cleared out if it exists, otherwise it will be created.
+
 === Notes ===
 The Combined Log Format is described [http://httpd.apache.org/docs/1.3/logs.html here].
 
