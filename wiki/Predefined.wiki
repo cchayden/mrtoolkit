@@ -6,6 +6,18 @@ As a convenience, MRToolkit comes with a set of predefined mappers and reducers.
 
 == Mappers ==
 === !CopyMap ==
+{{{CopyMap, copy}}}
+
+!CopyMap copies its input to its output.  The optional {{{copy}}} argument specifies how many fields to copy (defaults to 1).  
+
+This is useful where the purpose of the job is performed by the reduce stage, or where you want to eliminate some of the fields.
+
+=== !SelectMap ==
+{{{SelectMap, re, field, copy}}}
+
+!SelectMap selects records from its input based on a given regular expression.  The expression is matched against field {{{field}}}.  Field numbers are zero based. The optional {{{copy}}} argument specifies how many fields to copy (defaults to 1).  
+
+For example {{{SelectMap, /^GET/, 4}}} selects all records where field 4 (the request header) starts with GET, and outputs the first field (the IP address).
 
 == Reducers ==
 
@@ -17,6 +29,8 @@ As a convenience, MRToolkit comes with a set of predefined mappers and reducers.
 For example {{{CopyReduce, 2, 2}}} copies the third and fourth field of every record. 
 
 This reducer is often useful if you want to generate a field during the map phase that is used only to order the records, but which needs to be eliminated from the final output.
+
+!CopyMap and !CopyReduce can be used together where the purpose of the job is primarily the sorting stage that is performed as part of the shuffle.
 
 === !UniqueReduce ==
 {{{UniqueReduce}}}
@@ -61,10 +75,8 @@ Sometimes it is desired to group by two fields at the same time.  For instance, 
   * user agent
 Then use {{{UniqueSumReduce 1, 2}}}.  This will sum up the byte counts for each unique combination of IP address and user agent, and also output the IP address and user agent separately.  A post-processing step can eliminate the first field.
   
-
-
 === !UniqueCountReduce ==
-{{{UniqueCountRecuce extra}}}
+{{{UniqueCountReduce extra}}}
 
 !UniqueCountReduce counts the number of records in each group of records with the same first field.  The optional argument {{{extra}}} gives the number of additional fields to output (defaults to 0).  The extra are taken from the last record in each group.  
 
@@ -73,7 +85,13 @@ If you simply need to identify the unique values in a field and count up the num
 === !UniqueIndexedSumReduce ==
 {{{UniqueIndexedSumReduce}}}
 
-!UniqueIndexedSumReduce ???
+!UniqueIndexedSumReduce operates on groups of records with the same first field.  It outputs one output record for each unique value of the second field.  The output record consists of the first (grouping) field, the second field, and a sum of the values of the third field (for each value of the first two fields).
+
+For example, you can count the number of requests for each IP address for each result code by using the mapper to put the IP address in the first field, the result code in the second field, and 1 in the third field.  
+
+Because the input is not grouped on the second field, the reducer must have memory for all the values of the second field (within each group).  So this reducer is appropriate for situations where there may be large numbers of values in the first field, but within each group, only a limited number of values for the second.  
+
+This reducer provides another way to do joint uniqueness across two fields, applicable when there is a limited number of values in the second field.  The example above, using the result code for the second field, is appropriate because there are only a few result code values in use.
 
 === !SampleReduce ==
 {{{SampleReduce, sample_size}}}
