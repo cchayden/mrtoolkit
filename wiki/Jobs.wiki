@@ -1,13 +1,15 @@
-#summary Constructing the Hadoop job.
+#summary Describes how to construct the Hadoop job.
 
 = Jobs =
 
-Add your content here.
+Every MRToolkit program must define a job class: a class that derives from !JobBase.  The job class defines a mapper class, a reducer class, one or more input directories, and an output directory. 
 
+The statements in the job class are, in reality, class methods of !JobBase, and are typically used without parentheses so that they resemble declarations.  
 
-= Details =
+== Stages ===
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+Jobs are composed from a series of stages, each of which contains a mapper and a reducer.  Each stage is defined by a separate method, named "stage1", "stage2", etc.  Stages are executed in numerical order.  Each stage takes files from one directory and produces files in a different one.  These can be chained together in a mutli-stage program.
+
+If the job consists of a single stage, the function can be named "job".  If you define "job" then you should not define stage methods (although if you do, the job will be run first, then the stages).
+
+== Mapper ==
