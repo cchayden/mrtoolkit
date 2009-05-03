@@ -4,6 +4,11 @@
 
 To define your own reducer, you should write a class derived from !ReduceBase.
 
+== Declarations ==
+Declarations, both field, emit, and separator declarations are the same as for mappers [Mappers].  
+
+Reducer input fie names are ordinarily the same as mapper output field names, but they don't have to be: you can name them anything.
+
 
 process_begin
 process_end
@@ -12,6 +17,9 @@ process_init
 process_each
 process_term
 
-new_output
+== Output Records ==
+{{{new_output}}}
 
-write_out
+As with mappers, you can get instance of output records by calling {{{new_output}}}.
+
+
