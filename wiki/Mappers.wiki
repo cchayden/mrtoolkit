@@ -2,12 +2,20 @@
 
 = Mappers =
 
-Add your content here.
+To define your own mapper, you should write a class derived from !MapBase.
 
+field name
+emit name
+field_separator sep
+emit_separator sep
 
-= Details =
+declare
+process_begin
+process
+process_end
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+new_input
+new_output
+
+copy_struct
+write_out
