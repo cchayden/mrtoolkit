@@ -2,12 +2,49 @@
 
 = Predefined Mappers and Reducers =
 
-Add your content here.
+As a convenience, MRToolkit comes with a set of predefined mappers and reducers.  This collection will be expanded over time as we discover more commonly-used map and reduce operations.
+
+== Mappers ==
+=== !CopyMap ==
+
+== Reducers ==
+
+=== !CopyReduce ===
+{{{CopyReduce, copy, skip}}}
+
+!CopyReduce copies every record from its input to its output.  The optional argument {{{copy}}} gives the number of fields to copy.  The optional argument {{{skip}}} gives the number of initial fields to skip.  
+
+For example {{{CopyReduce, 2, 2}}} copies the third and fourth field of every record. 
+
+This reducer is often useful if you want to generate a field during the map phase that is used only to order the records, but which needs to be eliminated from the final output.
+
+=== !UniqueReduce ==
+{{{UniqueReduce}}}
+
+!UniqueReduce examines the first field of every record, and outputs only the last record of each series with the same first field.  Because the shuffle operation brings together all records with the same first field, this effectively picks one of them for output.
+
+This reducer is useful for creating samples of the data, for each unique value of the first field.
+
+=== !SumReduce ==
+{{{SumReduce, count, skip}}}
+
+!SumReduce sums the values in the given fields.  The optional argument {{{count}}} gives the number of fields to sum.  The optional argument {{{skip}}} gives the number of initial fields to skip.  
+
+For example, {{{SumReduce, 1, 2}}} outputs a single field, which is the sum of the values in field 3 (the first two fields are skipped).
+
+This is useful for adding up totals across the entire input set.  In this instance the shuffle aspect of map/reduce is not being used.  For better performance, you should make sure that the first field has sufficient diversity to allow multiple reducers: if the first field of every record is identical, the system will be forced to use a single reduce stage.
+
+Remember that each reducer produces its own output, so if you want a sum across all records, you will need to sum up the final result of each reducer separately.
+ 
+=== !UniqueSumReduce ==
+{{{UniqueSumReduce, count, extra}}}
 
 
-= Details =
+=== !UniqueCountReduce ==
+=== !UniqueIndexedSumReduce ==
+=== !SampleReduce ==
+=== !MaxReduce ==
+=== !UniqueFirstReduce ==
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+
+
