@@ -28,12 +28,12 @@ This program goes through a set of (slightly modified) Apache log files, and pro
 
 == More Information ==
   * [ToolkitInstall Installation]
-  * [ToolkitExamples Examples]
+  * [Examples Examples]
   * [Jobs Jobs]
-  * Mappers
-  * Reducers
-  * Predefined mappers and reducers
-  * Multi-step jobs
+  * [Mappers Mappers]
+  * [Reducers Reducers]
+  * [Predefined Predefined mappers and reducers]
+  * [MultiStep Multi-step jobs]
 
 == Acknowledgements ==
 MRToolkit was inspired by Goolge's [http://labs.google.com/papers/sawzall.html Sawzall].  We wanted to make it even easier by making use of an existing language, rather than inventing a new one.  Ruby was a perfect fit.
