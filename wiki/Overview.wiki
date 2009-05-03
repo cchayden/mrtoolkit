@@ -54,7 +54,9 @@ In the following example, the processing function looks at the HTTP request head
     output
   end
 }}}
-The function is passed an input record, populated with fields corresponding to the declaration.  It is also passed en empty output record (so that the routine does not have to instantiate one).  We see here that if the request is GET, then it sets the output record.  In any case
+The function is passed an input record, populated with fields corresponding to the declaration.  It is also passed en empty output record (so that the routine does not have to instantiate one).  We see here that if the request is GET, then it sets the output record to the pathname of the file requested.
+
+The function normally returns the output record, which is eventually passed to the reducer.  If the output record is not assigned, or if the function returns {{{nil}}} then this input record does not generate output to the reducer.
 
 === Notes ===
 The Combined Log Format is described [http://httpd.apache.org/docs/1.3/logs.html here].
