@@ -1,5 +1,3 @@
-#MRTools Overview
-
 = Introduction =
 
 == Overview of MRToolkit ==
