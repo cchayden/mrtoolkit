@@ -1,4 +1,4 @@
-#Summary Provides an overview of MRToolkit.
+#summary Provides an overview of MRToolkit.
 
 == Overview of MRToolkit ==
 
