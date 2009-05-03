@@ -4,6 +4,36 @@
 
 To define your own mapper, you should write a class derived from !MapBase.
 
+The mapper defines two things: the field names of the input and output records, and the processing function that produces an output record from an input record.  
+
+The field names are defined in a function {{{declare}}} that you should override.  
+Declarations use the {{{field}}} statement (for the input) and the {{{emit}}} statement (for the output).  
+
+For example, the following declares the fields of the Apache combined log format.  The output record consists of two fields, {{{ip}}} and {{{size}}}.
+{{{
+  def declare
+    # declare log fields
+    field :ip
+    field :client_id
+    field :user_id
+    field :dt_tm
+    field :request
+    field :status
+    field :result_size
+    field :referer
+    field :ua
+
+    emit :ip
+    emit :size
+  end
+}}}
+
+Records are delimited by newline characters; fields within a record are delimited by TABs, although this can be changed in the Job declaration.  The framework reads records, parses them into fields, which are essentially ruby {{{Struct}}} objects.  So the fields of the input record can be referred to in the following ways:
+||input.ip || The "ip" (first) field of the input ||
+|| input.dt_tm || The "dt_tm" (fourth) field of the input ||
+|| input[0] || the "ip" (first) field ||
+
+
 field name
 emit name
 field_separator sep
