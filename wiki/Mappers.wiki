@@ -81,16 +81,17 @@ If the function returns an output record, but it is the empty record passed to i
 
 {{{Process}}} can filter its input, reorder the fields, clean up and reformat the field values, and generally prepare for the next steps.  Less often, {{{process}}} produces new fields that are built from values in the input.  This is done, for instance, to prepare for joint uniqueness [Predefined See predefined reducers].
 
-{{{process_end(dummy, output)}}}
+==== process_end(dummy, output) ====
 {{{Process_end}}} is called after all input records have been processed.  It can clean up and release resources.  
 
 The normal case in which {{{process_end}}} is used is when the mapper is doing some kind of accumulation.  In this case, {{{process}}} records some information in member variables and returns nil.  Then {{{process_end}}} is used to produce all the output.  In this case it would be returning an array of output records.  The next section shows where it gets these.
 
 === Output Records ===
+==== new_output ====
 If any of the processing functions needs to return multiple output records, it can do so by returning an array.  It needs instances of the output record class to do so.  These records can be produced by calling the function {{{new_output}}}.
 
 === Copy Function ===
-{{{copy_struct(src, dest, skip = 0)}}}
+==== copy_struct(src, dest, skip = 0) ====
 The function {{{copy_struct}}} is implemented in the base class, and is useful for copying records from input to output without having to know the field names.  Because input and output types can be references by numerical index as well as by field name, you can make your own generic processing functions.  But for the simplest cases, this one will do.
 
 {{{Copy_struct}}} copies fields from the source structure to the dest structure by position.  If specified, the initial {{{skip}}} fields in the source are skipped.  All remaining fields in the source are copied.  Note that the _field names_ are not copied, only the values.  The field names are determined by the field and emit declarations.
