@@ -12,12 +12,12 @@ With MRToolkit, most of this is handled by the framework.  You have to
   # Define the processing of individual records.
   # Declare the location of the input files, and where to put the output files.
 
-To make things even simpler, MRToolkit comes with a set of pre-written mappers and reducers, so you might not have to even write a mapper or reducer class.
+To make things even simpler, MRToolkit comes with a set of predefined mappers and reducers, so you might not have to even write a mapper or reducer class.
 
 == Details ==
 In practice, you usually wind up writing a mapper class, but can often make use of a standard reducer.  Mappers are simpler to write, because they ordinarily process one record at a time and retain no memory from one record to the next.  Mapper state is impractical, because you cannot be sure whether two records will even be processed by the same mapper instance.
 
-Reducers ususally _do_ have state, because the whole point of reducers is to process groups of related records that have been brought together by the shuffle.  This makes them harder to write.  See how the pre-written reducers are implemented for ideas on how best to do this.
+Reducers ususally _do_ have state, because the whole point of reducers is to process groups of related records that have been brought together by the shuffle.  This makes them harder to write.  See how the predefined reducers are implemented for ideas on how best to do this.
 
 == Mapper ==
 The mapper usually consists of two parts: input and output field declarations and a processing step.
@@ -56,7 +56,7 @@ In the following example, the processing function looks at the HTTP request head
 }}}
 The function is passed an input record, populated with fields corresponding to the declaration.  It is also passed en empty output record (so that the routine does not have to instantiate one).  We see here that if the request is GET, then it sets the output record to the pathname of the file requested.
 
-The function normally returns the output record, which is eventually passed to the reducer.  If the output record is not assigned, or if the function returns {{{nil}}} then this input record does not generate output to the reducer.
+The function normally returns the output record, which is eventually passed to the reducer.  If the function returns {{{nil}}} then this input record does not generate output to the reducer.
 
 See [Mappers] for more detail on building mappers.
 
@@ -78,7 +78,7 @@ class MainJob < JobBase
 end
 }}}
 All job specifications are in a {{{job}}} function.
-The mapper and reducer declarations speficy the names of the mapper and reducer classes.  In this case, MainMap is a custom mapper, and MaxUniqueSumReduce is a pre-written class that takes one parameter (10).
+The mapper and reducer declarations speficy the names of the mapper and reducer classes.  In this case, MainMap is a custom mapper, and MaxUniqueSumReduce is a predefined class that takes one parameter (10).
 The indir declaration specifies the input directory (in HDFS): all the files in this directory will be processed.  
 The outdir declaration specifies the output directory (IN HDFS): it will be cleared out if it exists, otherwise it will be created.
 

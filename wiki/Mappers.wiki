@@ -71,7 +71,6 @@ The return value of each of these functions is either:
   * nil  - No output record is generated
   * output - A single output record passed to the reducer
   * Array of output - Each of the output records is passed to the reducer
-If the function returns an output record, but it is the empty record passed to it, no output record is generated.
 
 ==== process_begin(dummy, output) ====
 {{{Process_begin}}} is called before any input records.  It is normally used to initialize member variables, so it ignores its arguments and returns nil.
