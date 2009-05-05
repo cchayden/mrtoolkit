@@ -57,3 +57,13 @@ Map and reduce operations take place on different servers.  Bor them to execute,
 {{reduce_opt n, v}}}
 
 Hadoop provides a way to pass options to the map and reduce programs.  Options are name/value pairs that are passed to the "jobconf" parameter of Hadoop.  You may define as many of these as you need.
+
+== Running The Job ==
+If you name the job class so that it ends in "Job" (for example, !MainJob) then !MRToolkit will run it automatically.  If you choose to pick a different name, then you need to call the "run_command" class method.  For example:
+{{{
+  class MyJobClass
+    ...
+  end
+  MyJobClass.run_command
+}}}
+If you name the class according to the recommended convention, you should *not* explicitly call run_command.
