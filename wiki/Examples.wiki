@@ -58,6 +58,15 @@ See [http://code.google.com/p/mrtoolkit/source/browse/trunk/examples/ip-ua.rb so
 
 This job counts the number of distinct (IP address, user agent) pairs.  Its mapper illustrates the technique of building a synthetic field that combines the values of two input fields, for the purpose of counting.  For simplicity, the user agent is shortened to its first token. The individual fields are also output, so that a post processing step (in the Rakefile) can trim off the synthesized field while leaving behind the original fields.
 
+== ip-result.rb ==
+See [http://code.google.com/p/mrtoolkit/source/browse/trunk/examples/ip-result.rb source].
+
+This job counts the number of distinct (IP address, result code) pairs.
+Because there are only a limited number of distinct result codes, the !UniqueIndexedCountReduce reducer can be used.  For each value of the first field, it counts the number of times each different value in the second field appears.  It outputs the first and second field and the count, for each unique pair.  
+
+An alternative implementation would have been to have the mapper output a third field, containing the integer 1.  Then the reducer would have been !UniqueIndexedCountReduce.  
+Another context where !UniqueIndexedCountReduce would make sense is to sum up values in the input.  For instance it could be used to total the number of bytes returned for each combination of IP address and user agent.  To do this, the mapper would output the IP address, the user agent, and the byte count. 
+
 == import.rb ==
 See [http://code.google.com/p/mrtoolkit/source/browse/trunk/examples/import.rb import.rb]
 and [http://code.google.com/p/mrtoolkit/source/browse/trunk/examples/import-logs import-logs].
