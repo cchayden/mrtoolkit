@@ -53,6 +53,11 @@ The reducer, !MaxUniqueSumReduce, is a version of !UniqueSumReduce which only re
 
 Because Hadoop may use many reducers, and each operates independently, each will output a different 10 highest file-count pairs.  These are not guaranteed to be the highest overall, since each reducer sees different pairs.  But the output _is_ guaranteed to have to 10 highest counts overall.
 
+== top-file.rb ==
+See [http://code.google.com/p/mrtoolkit/source/browse/trunk/examples/ip-results.rb source].
+
+This job counts the number of distinct (IP address, result code) pairs.  Its mapper illustrates the technique of building a synthetic field that combines the values of two input fields, for the purpose of counting.  The individual fields are also output, so that a post processing step (in the Rakefile) can trim off the synthesized field while leaving behind the original fields.
+
 == import.rb ==
 See [http://code.google.com/p/mrtoolkit/source/browse/trunk/examples/import.rb import.rb]
 and [http://code.google.com/p/mrtoolkit/source/browse/trunk/examples/import-logs import-logs].
