@@ -94,6 +94,11 @@ Because the input is not grouped on the second field, the reducer must have memo
 
 This reducer provides another way to do joint uniqueness across two fields, applicable when there is a limited number of values in the second field.  The example above, using the result code for the second field, is appropriate because there are only a few result code values in use.
 
+=== !UniqueIndexedCountReduce ===
+{{{UniqueIndexedCountReduce}}}
+
+!UniqueIndexedCountReduce works like !UniqueIndexedSumReduce, instead of summing the third field, it simply counts the number of occurrences of the different values of the second field.
+
 === !SampleReduce ===
 {{{SampleReduce, sample_size}}}
 
