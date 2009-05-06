@@ -61,4 +61,34 @@ The simulated environment redefines the {{{hadoop}}} command, but only a small s
   * hadoop fs -lsr
   * hadoop jar
 
-The Hadoop File System is simulated in the current directory.  So if you have an import step, be sure to run it in the simulated environment, and make sure that you put the imported files somewhere different from their original place.
+The Hadoop File System is simulated in the current directory. So if you have an import step, be sure to run it in the simulated environment, and make sure that you put the imported files somewhere different from their original place.
+
+Now you can try the included examples. To make sure you run these in a simulated environment, run {{{which hadoop}}} and make sure it returns {{{mrtoolkit/sim/hadoop}}}.
+
+== Running the Example Jobs ==
+To try the example import, change current directory to {{{mrtoolkit/examples}}} and run
+{{{
+rake import
+}}}
+
+This command imports raw Apache logs included in {{{mrtoolkit/sample-data/raw-logs}}} and creates a {{{logs}}} directory with the imported files.
+
+For more details on the import job, see [http://code.google.com/p/mrtoolkit/source/browse/trunk/examples/import.rb import.rb]
+and [http://code.google.com/p/mrtoolkit/source/browse/trunk/examples/import-logs import-logs].
+
+Now you can try various example jobs included with MRToolkit. For example, let's count the number of unique IP addresses (first field) in the log files, and outputs the address and its count:
+{{{
+rake ips
+}}}
+
+After the job is finished, run the following command to see the result:
+{{{
+cat out/ip/part-00000
+}}}
+
+You can also see other example jobs included with MRToolkit:
+{{{
+rake -T
+}}}
+
+For more details on this and other example jobs, see [http://code.google.com/p/mrtoolkit/wiki/Examples|Examples]
