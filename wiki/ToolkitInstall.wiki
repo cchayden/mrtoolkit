@@ -65,7 +65,7 @@ The Hadoop File System is simulated in the current directory. So if you have an 
 
 Now you can try the included examples. To make sure you run these in a simulated environment, run {{{which hadoop}}} and make sure it returns {{{mrtoolkit/sim/hadoop}}}.
 
-== Running the Example Jobs ==
+== Running Examples ==
 To try the example import, change current directory to {{{mrtoolkit/examples}}} and run
 {{{
 rake import
@@ -89,4 +89,4 @@ You can see other example jobs included with MRToolkit by going to {{{mrtoolkit/
 rake -T
 }}}
 
-For more details on this and other example jobs, see [http://code.google.com/p/mrtoolkit/wiki/Examples|Examples]
+For more details on this and other example jobs, see [http://code.google.com/p/mrtoolkit/wiki/Examples Examples]
