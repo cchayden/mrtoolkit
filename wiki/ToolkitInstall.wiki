@@ -24,6 +24,8 @@ Normally, you install and run MRToolkit on a system that already has Hadoop.  So
 
 But you might want to install a simple non-cluster version of Hadoop to test out your scripts on a data subset, to get them working.  See the Hadoop [http://hadoop.apache.org/core/docs/current/quickstart.html Quick Start] for instructions.  
 
+Note: At the time of this writing, the latest STABLE version of Hadoop was still 0.18.3. You are encouraged to use the latest version though (0.20.x). Cluster Setup and Quick Start instructions assume you are using Hadoop 0.20.x on newer.
+
 If you follow the Quick Start instructions carefully, you will get a working version of Hadoop.  One more thing you must do is to set and export {{{HADOOP_HOME}}} and put this in your path.  You should also define {{{HADOOP_STREAMING_VERSION}}}, particularly if it is different from what appears below.  You can determine the proper version by looking at 
 {{{$HADOOP_HOME/contrib/streaming/hadoop-<version>-streaming.jar}}}.
 {{{
@@ -47,7 +49,7 @@ Now you can write trace statements such as
 {{{
 STDERR.puts "trace message"
 }}}
-in the mapper or reducer, and see the result on the console.  Remember, whether it is the simulaed environment or actual Hadoop, {{{STDOUT}}} is reserved for the data stream, so you cannot use it for trace output.
+in the mapper or reducer, and see the result on the console.  Remember, whether it is the simulated environment or actual Hadoop, {{{STDOUT}}} is reserved for the data stream, so you cannot use it for trace output.
 
 The simulated environment redefines the {{{hadoop}}} command, but only a small subset of its capabilities.  It will do:
   * hadoop fs -rmr
