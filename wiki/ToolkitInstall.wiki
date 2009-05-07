@@ -81,7 +81,7 @@ rake ips
 
 To see the result run
 {{{
-cat out/ip/part-00000
+more ips
 }}}
 
 You can see other example jobs included with MRToolkit by going to {{{mrtoolkit/examples}}} and running
