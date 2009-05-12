@@ -6,7 +6,7 @@
 
 *MRToolkit* is a framework for simplifying building jobs to run on the [http://hadoop.apache.org/ Hadoop] Map/Reduce system.  MRToolkit builds on Hadoop [http://hadoop.apache.org/core/docs/current/streaming.html Streaming], which allows you to write separate map and reduce jobs that operate through standard input and output.
 
-MRToolkit is built with [http://www.ruby-lang.org ruby]: you use ruby to write the map and reduce steps, and MRToolkit, streaming, and Hadoop do the rest.
+MRToolkit is built with [http://www.ruby-lang.org Ruby]: you use Ruby to write the map and reduce steps, and MRToolkit, streaming, and Hadoop do the rest.
 
 Just to give a taste of how simple it can be, here is a complete map/reduce program:
 {{{
