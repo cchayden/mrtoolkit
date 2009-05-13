@@ -33,25 +33,29 @@ export HADOOP_HOME=$HOME/hadoop-0.20.0
 export HADOOP_STREAMING_VERSION=0.20.0
 PATH=$PATH:$HADOOP_HOME/bin
 }}}
+Finally, you need to create a home directory for yourself in Hadoop File System:
+{{{
+hadoop fs -mkdir /user/<your login name>
+}}}
 
-== Using the Simulated Environment ==
+== Using the Standalone Environment ==
 
 In Hadoop, your job runs on computers in the cluster, ordinarily not the one you are running your program on.  This presents obstacles to debugging, if something goes wrong.  Even if you run in the Quick Start environment locally, the jobs execute as part of Hadoop, and it can be hard to see what they are doing.  
 
-To make it simpler to debug, a *simulated* environment is provided.  It simply concatenates all input files, pipes them to the mapper, sorts the output, pipes the result to the reducer, and stores the output.  It also simulates the Hadoop File System.
+To make it simpler to debug, a *standalone* environment is provided.  It simply concatenates all input files, pipes them to the mapper, sorts the output, pipes the result to the reducer, and stores the output.  It also simulates the Hadoop File System.
 
-To use this simulated environment, just include {{{mrtoolkit/sim}}} in the path before {{{$HADOOP_HOME}}} as follows:
+To use this standalone environment, just include {{{mrtoolkit/standalone}}} in the path before {{{$HADOOP_HOME}}} as follows:
 {{{
-PATH=$HOME/mrtoolkit/sim:$PATH
+PATH=$HOME/mrtoolkit/standalone:$PATH
 }}}
 
 Now you can write trace statements such as
 {{{
 STDERR.puts "trace message"
 }}}
-in the mapper or reducer, and see the result on the console.  Remember, whether it is the simulated environment or actual Hadoop, {{{STDOUT}}} is reserved for the data stream, so you cannot use it for trace output.
+in the mapper or reducer, and see the result on the console.  Remember, whether it is the standalone environment or actual Hadoop, {{{STDOUT}}} is reserved for the data stream, so you cannot use it for trace output.
 
-The simulated environment redefines the {{{hadoop}}} command, but only a small subset of its capabilities.  It will do:
+The standalone environment redefines the {{{hadoop}}} command, but only a small subset of its capabilities.  It will do:
   * hadoop fs -rmr
   * hadoop fs -rm
   * hadoop fs -mkdir
@@ -61,9 +65,9 @@ The simulated environment redefines the {{{hadoop}}} command, but only a small s
   * hadoop fs -lsr
   * hadoop jar
 
-The Hadoop File System is simulated in the current directory. So if you have an import step, be sure to run it in the simulated environment, and make sure that you put the imported files somewhere different from their original place.
+The standalone Hadoop File System is simulated in the current directory. So if you have an import step, be sure to run it in the standalone environment, and make sure that you put the imported files somewhere different from their original place.
 
-Now you can try the included examples. To make sure you run these in a simulated environment, run {{{which hadoop}}} and make sure it returns {{{mrtoolkit/sim/hadoop}}}.
+Now you can try the included examples. To make sure you run these in a standalone environment, run {{{which hadoop}}} and make sure it returns {{{mrtoolkit/sim/hadoop}}}.
 
 == Running Examples ==
 To try the example import, change current directory to {{{mrtoolkit/examples}}} and run
