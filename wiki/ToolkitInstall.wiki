@@ -21,6 +21,7 @@ If you don't want to do this, you can accomplish the same thing in a Rakefile.  
 == Running Toolkit Tests ==
 The {{{test}}} directory has unit tests.  You can run these by:
 {{{
+  cd t$HOME/mrtoolkit/test
   rake test
 }}}
 
