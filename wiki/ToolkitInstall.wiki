@@ -18,6 +18,12 @@ export RUBYLIB=$HOME/mrtoolkit/lib
 }}}
 If you don't want to do this, you can accomplish the same thing in a Rakefile.  For example, see {{{examples/Rakefile}}}.
 
+== Running Toolkit Tests ==
+The {{{test}}} directory has unit tests.  You can run these by:
+{{{
+  rake test
+}}}
+
 == Installing Hadoop ==
 
 Normally, you install and run MRToolkit on a system that already has Hadoop.  So that will not be described in detail here.  For complete instructions, see [http://hadoop.apache.org/core/docs/current/cluster_setup.html Cluster Setup].
